@@ -1,4 +1,4 @@
-package com.example.FifthSpringFinal.models;
+package com.example.FifthSpringFinal.dto;
 
 public class CustomUserDto {
     private String username;

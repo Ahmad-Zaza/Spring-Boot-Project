@@ -1,7 +1,10 @@
-package com.example.FifthSpringFinal.models;
+package com.example.FifthSpringFinal.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -9,6 +12,12 @@ public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<EstateDto> estates = new ArrayList<>();
 
     @Column(unique = true)
     private String username;

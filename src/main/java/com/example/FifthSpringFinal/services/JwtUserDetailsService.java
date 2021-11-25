@@ -1,7 +1,7 @@
 package com.example.FifthSpringFinal.services;
 
-import com.example.FifthSpringFinal.models.CustomUser;
-import com.example.FifthSpringFinal.models.CustomUserDto;
+import com.example.FifthSpringFinal.dto.CustomUser;
+import com.example.FifthSpringFinal.dto.CustomUserDto;
 import com.example.FifthSpringFinal.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
