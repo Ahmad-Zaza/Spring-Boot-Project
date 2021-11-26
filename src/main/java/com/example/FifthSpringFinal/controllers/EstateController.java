@@ -35,7 +35,7 @@ public class EstateController {
     }
 
     @GetMapping({"/{estate_id}"})
-    public ResponseEntity<?> getEstate(@RequestParam Integer estate_id) {
+    public ResponseEntity<?> getEstate(@PathVariable Integer estate_id) {
         return new ResponseEntity<>(estateService.getEstateById(estate_id), HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class EstateController {
     }
 
     @PutMapping({"/{estate_id}"})
-    public ResponseEntity<?> updateEstate(@RequestParam("estate_id") Integer estate_id, @RequestBody EstateDto estate) {
+    public ResponseEntity<?> updateEstate(@PathVariable("estate_id") Integer estate_id, @RequestBody EstateDto estate) {
         estateService.updateEstate(estate_id, estate);
         return new ResponseEntity<>(estateService.getEstateById(Math.toIntExact(estate_id)), HttpStatus.OK);
     }
