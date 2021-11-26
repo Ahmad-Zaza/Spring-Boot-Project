@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 @Entity
 @Table(name = "users")
 public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -48,11 +48,11 @@ public class CustomUser {
         this.password = password;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -71,5 +71,7 @@ public class CustomUser {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+
 }
 

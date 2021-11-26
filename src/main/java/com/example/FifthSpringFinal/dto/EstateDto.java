@@ -1,15 +1,15 @@
 package com.example.FifthSpringFinal.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import java.util.Optional;
+
 @Entity
 @Table(name = "estates")
 public class EstateDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
@@ -24,14 +24,12 @@ public class EstateDto {
     @Column(name="num_of_shares")
     private int numOfShares;
 
-    @Column(name="test")
-    private int test;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
