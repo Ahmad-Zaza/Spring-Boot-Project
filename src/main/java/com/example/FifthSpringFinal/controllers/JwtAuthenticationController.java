@@ -47,7 +47,7 @@ public class JwtAuthenticationController {
 
         CustomUser user = userRepository.findByUsername(authenticationRequest.getUsername());
 
-        return ResponseEntity.ok(new AuthenticationResponse(token, authenticationRequest.getUsername(), user.getFirstName(), user.getLastName()));
+        return ResponseEntity.ok(new AuthenticationResponse(user.getId(), token, authenticationRequest.getUsername(), user.getFirstName(), user.getLastName()));
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
