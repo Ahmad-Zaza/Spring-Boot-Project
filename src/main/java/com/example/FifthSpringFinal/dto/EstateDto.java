@@ -24,6 +24,12 @@ public class EstateDto {
     @Column(name="num_of_shares")
     private int numOfShares;
 
+    @Column(name = "is_sold")
+    private boolean isSold;
+
+    @Column
+    private String purchaser;
+
 
     public int getId() {
         return id;
@@ -65,5 +71,11 @@ public class EstateDto {
         this.numOfShares = numOfShares;
     }
 
+    public boolean isSold() { return isSold; }
 
+    public void setSold(boolean sold) { isSold = sold; }
+
+    public String getPurchaser() { return purchaser; }
+
+    public void setPurchaser(String purchaser) { this.purchaser = purchaser; }
 }
