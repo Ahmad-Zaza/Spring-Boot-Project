@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin(origins = {"http://localhost:4200", "http://10.0.2.2:8080"})
 public class TestController {
 
     @Autowired
