@@ -1,8 +1,11 @@
 package com.example.FifthSpringFinal.services;
 
 
+import com.example.FifthSpringFinal.dto.CustomUser;
 import com.example.FifthSpringFinal.dto.EstateDto;
 import com.example.FifthSpringFinal.repositories.EstateRepository;
+import com.example.FifthSpringFinal.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,9 +14,13 @@ import java.util.List;
 @Service
 public class EstateService implements IEstateService {
 
+    @Autowired
     EstateRepository estateRepository;
 
-    public EstateService(EstateRepository estateRepository){
+    @Autowired
+    UserRepository userRepository;
+
+    public EstateService(EstateRepository estateRepository) {
         this.estateRepository = estateRepository;
     }
 
@@ -49,4 +56,28 @@ public class EstateService implements IEstateService {
     public void deleteEstate(int estate_id) {
         estateRepository.deleteById(estate_id);
     }
+
+    @Override
+    public CustomUser getUserById(int userId) {
+        System.out.println("=========== " + userRepository.findById(userId).get().toString());
+        return userRepository.findById(userId).get();
+    }
+
+    @Override
+    public void buyEstate(int estate_id, EstateDto estateDto) {
+        EstateDto estateFromDb = estateRepository.findById(estate_id).get();
+        estateFromDb.setName(estateDto.getName());
+        estateFromDb.setPrice(estateDto.getPrice());
+        estateFromDb.setNumOfShares(estateDto.getNumOfShares());
+        estateFromDb.setCustomUser(estateDto.getCustomUser());
+        estateFromDb.setPurchaser(estateDto.getPurchaser());
+        estateFromDb.setSellPrice(estateDto.getSellPrice());
+        estateFromDb.setSold(true);
+
+        System.out.println("ooooooh " + estateDto.toString());
+
+        estateRepository.save(estateFromDb);
+    }
+
+
 }

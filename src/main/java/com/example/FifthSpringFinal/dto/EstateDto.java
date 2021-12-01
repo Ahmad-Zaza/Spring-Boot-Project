@@ -1,5 +1,7 @@
 package com.example.FifthSpringFinal.dto;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.util.Optional;
 
@@ -12,7 +14,7 @@ public class EstateDto {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     private CustomUser customUser;
 
     @Column(nullable = false, length = 50)
@@ -21,14 +23,20 @@ public class EstateDto {
     @Column(nullable = false)
     private double price;
 
-    @Column(name="num_of_shares")
+    @Column(name = "num_of_shares", nullable = false)
     private int numOfShares;
 
     @Column(name = "is_sold")
+    @Nullable
     private boolean isSold;
 
     @Column
+    @Nullable
     private String purchaser;
+
+    @Column
+    @Nullable
+    private double sellPrice;
 
 
     public int getId() {
@@ -71,11 +79,41 @@ public class EstateDto {
         this.numOfShares = numOfShares;
     }
 
-    public boolean isSold() { return isSold; }
+    public boolean isSold() {
+        return isSold;
+    }
 
-    public void setSold(boolean sold) { isSold = sold; }
+    public void setSold(boolean sold) {
+        isSold = sold;
+    }
 
-    public String getPurchaser() { return purchaser; }
+    public String getPurchaser() {
+        return purchaser;
+    }
 
-    public void setPurchaser(String purchaser) { this.purchaser = purchaser; }
+    public void setPurchaser(String purchaser) {
+        this.purchaser = purchaser;
+    }
+
+    public double getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(double sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "EstateDto{" +
+                "id=" + id +
+                ", customUser=" + customUser +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", numOfShares=" + numOfShares +
+                ", isSold=" + isSold +
+                ", purchaser='" + purchaser + '\'' +
+                ", sellPrice='" + sellPrice + '\'' +
+                '}';
+    }
 }
