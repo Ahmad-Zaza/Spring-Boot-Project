@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Queue B</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+</head>
+<body>
+<div>
+    <input type="text" name="input" id="message">
+    <button id="btn">Send</button>
+</div>
+
+<div id="recievedMsg">
+
+</div>
+
+<script>
+        var stompClient = null;
+        $(document).ready(function(){
+            createConnection();
+            $('#btn').click(function(){
+                var message = $('#message').val();
+                sendMessage(message);
+                $('#recievedMsg').append('<span> you : ' + message + '</span><br>');
+                $('#message').val('');
+            });
+
+            function createConnection(){
+                var socket = new SockJS('http://localhost:9090/message-queue');
+                stompClient = Stomp.over(socket);
+                stompClient.connect({}, function(connectionData){
+                    console.log(connectionData);
+                    stompClient.subscribe('/sample/publish2', function(data){
+                        console.log(data.body);
+                        $('#recievedMsg').append('<span> sender : ' + data.body + '</span><br>');
+                    });
+                });
+            }
+
+            function sendMessage(message){
+                stompClient.send('/app/B', {}, message);
+            }
+
+        })
+    </script>
+</body>
+</html>
