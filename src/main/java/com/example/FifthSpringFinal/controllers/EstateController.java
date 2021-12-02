@@ -109,7 +109,8 @@ public class EstateController {
             "user_id": 1,
             "name": "123123123",
             "price": 22,
-            "sellPrice": 84512
+            "sellPrice": 84512,
+            "purchaser": "ZEDO"
          }
         */
 
