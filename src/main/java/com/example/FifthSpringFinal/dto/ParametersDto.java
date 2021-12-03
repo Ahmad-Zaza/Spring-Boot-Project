@@ -1,7 +1,11 @@
 package com.example.FifthSpringFinal.dto;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Date;
 
 @Entity
 @Table(name = "parameters_static")
@@ -24,6 +28,24 @@ public class ParametersDto {
 
     @Column(nullable = false, name = "value_parameter")
     private int value;
+
+    @Column(name = "updated_at")
+    @LastModifiedDate
+    Date updatedAt;
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
+
+    @PrePersist
+    private void onCreate() {
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
+
+    @PreUpdate
+    private void onUpdate() {
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
 
     public String getKey() {
         return key;
