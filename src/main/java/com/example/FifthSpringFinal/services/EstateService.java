@@ -31,7 +31,6 @@ public class EstateService implements IEstateService {
         return estates;
     }
 
-
     @Override
     public EstateDto getEstateById(int id) {
         return estateRepository.findById(id).get();
@@ -39,6 +38,7 @@ public class EstateService implements IEstateService {
 
     @Override
     public EstateDto insert(EstateDto estateDto) {
+        estateDto.setWhoAdd(estateDto.getCustomUser().getFirstName() + " " + estateDto.getCustomUser().getLastName());
         return estateRepository.save(estateDto);
     }
 
@@ -49,6 +49,8 @@ public class EstateService implements IEstateService {
         estateFromDb.setPrice(estateDto.getPrice());
         estateFromDb.setNumOfShares(estateDto.getNumOfShares());
         estateFromDb.setCustomUser(estateDto.getCustomUser());
+        estateFromDb.setWhoEdit(estateDto.getCustomUser().getFirstName() + " " + estateDto.getCustomUser().getLastName());
+
         estateRepository.save(estateFromDb);
     }
 

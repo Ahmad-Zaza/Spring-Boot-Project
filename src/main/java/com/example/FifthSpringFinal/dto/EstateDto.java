@@ -1,8 +1,11 @@
 package com.example.FifthSpringFinal.dto;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Optional;
 
 @Entity
@@ -38,6 +41,45 @@ public class EstateDto {
     @Nullable
     private double sellPrice;
 
+    @Column(name = "updated_at")
+    @LastModifiedDate
+    Date updatedAt;
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
+
+    @PrePersist
+    private void onCreate() {
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
+
+    @PreUpdate
+    private void onUpdate() {
+        this.updatedAt = new Date(System.currentTimeMillis());
+    }
+
+    @Column
+    public String whoAdd;
+
+    @Column
+    public String whoEdit;
+
+    public String getWhoAdd() {
+        return whoAdd;
+    }
+
+    public void setWhoAdd(String whoAdd) {
+        this.whoAdd = whoAdd;
+    }
+
+    public String getWhoEdit() {
+        return whoEdit;
+    }
+
+    public void setWhoEdit(String whoEdit) {
+        this.whoEdit = whoEdit;
+    }
 
     public int getId() {
         return id;
