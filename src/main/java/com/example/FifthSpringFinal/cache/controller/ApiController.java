@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/parameter")
 public class ApiController {
 
     @Autowired
