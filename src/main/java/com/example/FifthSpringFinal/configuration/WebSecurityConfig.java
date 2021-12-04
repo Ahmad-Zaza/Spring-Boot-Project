@@ -21,6 +21,8 @@ import org.springframework.web.cors.CorsConfiguration;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private ConfigurationConstants configurationConstants;
+
 	@Autowired
 	private com.example.FifthSpringFinal.configuration.JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -46,13 +48,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
+//	@Override
+//	protected void configure(HttpSecurity httpSecurity) throws Exception {
+////		httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+//		httpSecurity.csrf().disable()
+//				.authorizeRequests().antMatchers("/login", "/register", "/create", "/view_messages").permitAll().
+//						anyRequest().authenticated().and().
+//						exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//	}
+
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 //		httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 		httpSecurity.csrf().disable()
-				.authorizeRequests().antMatchers("/login", "/register", "/create", "/view_messages").permitAll().
-						anyRequest().authenticated().and().
-						exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+				.authorizeRequests().antMatchers("/login", "/register", "/create", "/view_messages").permitAll()
+				.antMatchers(configurationConstants.ESTATE).permitAll()
+				.anyRequest().authenticated().and().
+				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}

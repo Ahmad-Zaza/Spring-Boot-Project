@@ -25,16 +25,16 @@ public class FifthSpringFinalApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        int countParams = 0;
-        countParams = parametersService.getCountRows();
-        if(countParams == 0){
-            System.out.println("Hello World! for first time!");
-            parametersService.save(new ParametersDto(
-                    "arrow_count", 20
-            ));
-            parametersService.save(new ParametersDto(
-                    "profit_ratio", 800
-            ));
-        }
+//        int countParams = 0;
+//        countParams = parametersService.getCountRows();
+//        if(countParams == 0){
+//            System.out.println("Hello World! for first time!");
+//            parametersService.save(new ParametersDto(
+//                    "arrow_count", 20
+//            ));
+//            parametersService.save(new ParametersDto(
+//                    "profit_ratio", 800
+//            ));
+//        }
     }
 }
