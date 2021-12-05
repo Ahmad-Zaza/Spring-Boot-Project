@@ -5,11 +5,10 @@ import com.example.FifthSpringFinal.repositories.ParametersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -87,9 +86,28 @@ public class ParametersService implements IParametersService {
             condition = "#isCacheable != null && #isCacheable")
     public Optional<ParametersDto> fetchStudent(String key, boolean isCacheable) throws InterruptedException {
         Thread.sleep(4000);
-        return Arrays
+        List<ParametersDto> list = new ArrayList<>();
+        for (ParametersDto parametersDto : parametersRepository.findAll()) {
+            list.add(parametersDto);
+        }
+
+        System.out.println("*******> " + list.toString());
+        return list.stream().filter(p -> p.getKey().equalsIgnoreCase(key)).findFirst();
+
+
+        /*return Arrays
                 .asList(new ParametersDto("arrow_count", 20), new ParametersDto("profit_ratio", 800))
-                .stream().filter(t -> t.getKey().equalsIgnoreCase(key)).findFirst();
+                .stream().filter(t -> t.getKey().equalsIgnoreCase(key)).findFirst();*/
     }
+
+    boolean getContains(String key, List<ParametersDto> list) {
+        for (ParametersDto parametersDto : list) {
+            if (parametersDto.getKey().equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
