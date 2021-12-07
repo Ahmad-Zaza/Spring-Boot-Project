@@ -17,6 +17,6 @@ public class GreetingController {
 
     @GetMapping("/viewSocket")
     public String showIt(){
-        return "index";
+        return "socket_queue_messages";
     }
 }

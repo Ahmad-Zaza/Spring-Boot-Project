@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //		httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 		httpSecurity.csrf().disable()
 				.authorizeRequests().antMatchers("/login", "/register",
-						"/create", "/view_messages", "/parameter", "/",
+						"/create", "/view_messages", "/parameter", "/viewSocket",
 						"/stomp-endpoint/**", "/webjars/**").permitAll().
 						anyRequest().authenticated().and().
 						exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

@@ -5,23 +5,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Data
+@Entity
+@Table(name = "messages")
 public class MessageDto {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     private String email;
+
     private String content;
+
     private String date;
 
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

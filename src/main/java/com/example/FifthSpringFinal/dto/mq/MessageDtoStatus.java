@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

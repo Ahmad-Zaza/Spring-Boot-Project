@@ -3,7 +3,7 @@ package com.example.FifthSpringFinal.mq_utils.consumer;
 import com.example.FifthSpringFinal.FifthSpringFinalApplication;
 import com.example.FifthSpringFinal.dto.mq.MessageDtoStatus;
 import com.example.FifthSpringFinal.mq_utils.config.MessageConfig;
-import com.example.FifthSpringFinal.mq_utils.socket.Greeting;
+import com.example.FifthSpringFinal.services.IMessageDtoService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -14,8 +14,12 @@ import java.util.Map;
 
 @Component
 public class UserConsumer {
+
     @Autowired
-    private SimpMessagingTemplate template;
+    private SimpMessagingTemplate simpMessagingTemplate;
+
+    @Autowired
+    private IMessageDtoService messageDtoService;
 
 
     @RabbitListener(queues = MessageConfig.QUEUE)
@@ -27,6 +31,7 @@ public class UserConsumer {
 
     public void sendToSocket(MessageDtoStatus messageDtoStatus) {
         System.out.println(messageDtoStatus.toString());
+        messageDtoService.save(messageDtoStatus.getMessageDto());
         Map<String, String> map = new HashMap<>();
         Map<String, String> map2 = new HashMap<>();
         map.put("date", messageDtoStatus.getMessageDto().getDate());
@@ -36,7 +41,7 @@ public class UserConsumer {
         map2.put("message", map.toString());
 
 
-        this.template.convertAndSend("/topic/greetings", map2);
+        this.simpMessagingTemplate.convertAndSend("/topic/greetings", map2);
     }
 
 }

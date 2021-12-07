@@ -21,8 +21,6 @@ public class MessagePublisher {
 
     @PostMapping
     public String sendMessage(@RequestBody MessageDto messageDto){
-        messageDto.setId(UUID.randomUUID().toString());
-
         MessageDtoStatus messageDtoStatus = new MessageDtoStatus();
         messageDtoStatus.setMessageDto(messageDto);
         messageDtoStatus.setStatus("PROCESS");
