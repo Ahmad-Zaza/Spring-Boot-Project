@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				.authorizeRequests().antMatchers("/login", "/register",
 						"/create", "/view_messages", "/parameter", "/",
-						"/stomp-endpoint/**").permitAll().
+						"/stomp-endpoint/**", "/webjars/**").permitAll().
 						anyRequest().authenticated().and().
 						exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
