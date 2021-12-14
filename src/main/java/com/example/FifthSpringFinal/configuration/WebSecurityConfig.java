@@ -65,10 +65,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				.authorizeRequests().antMatchers("/login", "/register", "/create", "/view_messages").permitAll()
 				.antMatchers(configurationConstants.ESTATE).permitAll()
+				.antMatchers("/h2-console/**").permitAll()
 				.anyRequest().authenticated().and().
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.headers().frameOptions().disable();
 	}
 
 }
